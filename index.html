@@ -1,65 +1,139 @@
-<!doctype html>
+﻿<!doctype html>
 <!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
 <!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
-  <link rel="stylesheet" href="stylesheets/github-dark.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
-
-  <title>API Health Check</title>
-  <meta name="description" content="Checking Your API&#39;s Health Since 1968">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/script.js"></script>
+    <title>API Health Check</title>
+    <meta name="description" content="Checking Your API&#39;s Health Since 1968">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
-
 <body>
-
-  <div class="wrapper">
-    <header>
-      <h1 class="title">API Health Check</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">Checking Your API&#39;s Health Since 1968</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/S00133309/APIHealthCheck/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/S00133309/APIHealthCheck/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/S00133309/APIHealthCheck" class="code">View API Health Check on GitHub</a>
+    <div class="wrapper">
+        <header>
+            <h1 class="title">API Health Check</h1>
+        </header>
+        <div id="container">
+            <p class="tagline"><i>Checking Your API&#39;s Health Since 1968</i></p>
+            <div id="main" role="main">
+                <div class="download-bar">
+                    <div class="inner">
+                        <a href="https://github.com/S00133309/APIHealthCheck/tarball/master" class="download-button tar"><span>Download</span></a>
+                        <a href="https://github.com/S00133309/APIHealthCheck/zipball/master" class="download-button zip"><span>Download</span></a>
+                        <a href="https://github.com/S00133309/APIHealthCheck" class="code">View API Health Check on GitHub</a>
+                    </div>
+                    <span class="blc"></span><span class="trc"></span>
+                </div>
+				<article class="markdown-body">
+                    <h2>
+                        <a id="week-8" class="anchor" href="#week-5-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 5-7
+                    </h2>
+					<h3>Oct 26th - Nov 01st</h3>
+                    <p>A lot of changes this week to talk about. Decided to scrap the archetype I'd been using so far for a different one. Too much hassle and not
+					enough gain. Also decided to drop jersey and instead go full spring MVC. You can do a lot of restfull stuff with spring so it wont
+					make that much difference client side but because I'll be using spring everywhere then it'll all click together a little more smoothly.
+					Like I said already, changed arechetypes and now I'm using <a href="http://maven-repository.com/artifact/co.ntier/spring-mvc-archetype/1.0.2">
+					co.ntier:spring-mvc-archetype:1.0.2</a>. It's a little out of date in terms of spring versions and stuff but it's not much work to
+					bring it to the present. Plus it's a lot nicer to work with since there's no random config files hidden around the place. And finally I also
+					need to bring in Jackson into the project for dealing with json stuff since spring ain't so good at that. Shouldn't be a problem though.
+                </article>
+				<article class="markdown-body">
+                    <h2>
+                        <a id="week-5-7" class="anchor" href="#week-5-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 5-7
+                    </h2>
+					<h3>Oct 12th - Oct 25th</h3>
+                    <p>Not much to report really. Everything that I had planned to do has happened basically. As planned I got the db working fine,
+					the connection isn't a problem and with spring it's really nice and simple to get stuff setup. So far I've got the db working,
+					the interface class and the class that talks to that one up and running. As well as a super basic controller for testing. Over the 
+					next week I want to get a start on the jersey stuff and get rid of the controller class. Then I'll be able to test things from the client
+					side straight through to the db which should be nice. A lot of assingments though so not entierly sure how much I'll get done.
+                </article>
+				<article class="markdown-body">
+                    <h2>
+                        <a id="week-4" class="anchor" href="#week-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 4
+                    </h2>
+					<h3>Oct 5th - Oct 11th</h3>
+                    <p>Picking up where I left off last week I've decided on a decent archetype to start with. <a href="https://github.com/kolorobot/spring-mvc-quickstart-archetype">
+					Spring MVC 4 Quickstart Maven Archetype</a> As the name suggests it's a spring mvc 4 archetype. Uses a few things I don't need, like 
+					mongodb config stuff, but it has the same-ish structure that I want and it comes with spring integration out the box. Also got everything
+					I think I need up and running to get started on some actual coding. Using eclipse for all my coding mostly which feels strange coming
+					off visual studios but it's good none-the-less. Going into a two week sprint now where I hope to get a nice chunk of work out of the.
+					The plan is to create a simple temp db, connect to it and have all basic crud operations working smoothly. I don't really know what
+					stuff I'm going to be needing so I'm going with dummy stuff. The important part is to get the db connection working since that could
+					be a pain.					
+                </article>
+				<article class="markdown-body">
+                    <h2>
+                        <a id="week-3" class="anchor" href="#week-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 3
+                    </h2>
+					<h3>Sep 28th - Oct 04th</h3>
+                    <p>Got a decent amount done this week, have sone wireframes done which helped clear up some functionality questions and got
+					the tech diagram done up too. Gonna start setting up my environment for next week. Need to get eclipse, set up Git, etc... etc...
+					Decided to use apache.net for the pinging part of the project. Because I'm using java I could go with java.net but the apache
+					version has a lot more to it which I think will be useful. If not then bugger. Also briefly looked into which server on my machine,
+					decided on apache tomcat because why not, also because it's good and I sorta know how it works which should save me some set up time.
+					Last but not least I also started looking into maven archetypes to use for my project, not sure which I'm going to go with yet, hard to
+					tell which are good without being able to try 'em out. More on that next week so stay tuned.
+					
+					</br></br><img src="images/TechDiagram.png"/></p>
+                </article>
+				<article class="markdown-body">
+                    <h2>
+                        <a id="week-2" class="anchor" href="#week-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 2
+                    </h2>
+					<h3>Sep 21th - Sep 27th</h3>
+                    <p>First meeting with Colm this monday and talked over what exactly I have in mind for the project. No bad comments that I remember (so
+					they can't have been that important). There doesn't look like any obvious problems with the technologies I've picked. I have decided
+					to go with Java for the backend. Probably going to use spring as the framework for a lot of stuff but I also plan to use Jearsy to create
+					my restfull service that my frontend will talk with. The front end is gonna be the usual stuff, html5, css, javascript(jQuery) and probably
+					some bootstrap in there too. For next week I'm going to try and have some kind of tech diagram drawn up on paper just to help sort things
+					out in my head. Also gonna start on wireframes and think about the db design.</p>
+                </article>
+				<article class="markdown-body">
+                    <h2>
+                        <a id="week-1-ish" class="anchor" href="#week-1-ish" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 1(-ish)
+                    </h2>
+					<h3>Sep 14th - Sep 20th</h3>
+                    <p>Project API HealthCheck is go. Started looking into exactly what I'll be doing for the project. Figuring out what technologies
+					I'll use and all that jazz. More than likely going the Java route so I need to set up my environment for that. Also looking into
+					possible frameworks to use and general structure for the project. Already decided to use h2 as the database. It's simple to use,
+					lightweight and does exactly what I need it to. (<a href="http://www.h2database.com/html/main.html">h2 Database Engine</a>).
+					Also spoke to Colm about maybe having him as my supervisor for the project, it's all a bit up in the air since it's so early
+					on but provisionally he's down with it.</p>
+                </article>
+                <article class="markdown-body">
+                    <h2>
+                        <a id="welcome-to-the-api-healthcheck-project" class="anchor" href="#welcome-to-the-api-healthcheck-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to the API HealthCheck Project
+                    </h2>
+                    <p>The API HealthCheck project aims to be a website and app that allows developers to easily check 
+					if APIs that they use or might use are online or offline. This service will provide the ability to see 
+					how often an API is up or down, how long it stays down, along with other data that may be pertinent. 
+					The service will also allow developers to put their APIs onto a global list that is viewable by everyone. 
+					This will allow developers who are searching for appropriate APIs to find reliable ones to use. 
+					It will also give the possibility for users to link to APIs on the global list to use in the promotion of their services.</p>
+                </article>
+            </div>
         </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h2>
-<a id="welcome-to-the-api-healthcheck-project" class="anchor" href="#welcome-to-the-api-healthcheck-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to the API HealthCheck Project</h2>
+        <footer>
+            <div class="owner">
+                <p><a href="https://github.com/S00133309" class="avatar"><img src="https://avatars3.githubusercontent.com/u/5436158?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/S00133309">S00133309</a> maintains <a href="https://github.com/S00133309/APIHealthCheck">API Health Check</a></p>
 
-<p>The API HealthCheck project aims to be a website and app that allows developers to easily check if APIs that they use or might use are online or offline. This service will provide the ability to see how often an API is up or down, how long it stays down, along with other data that may be pertinent. The service will also allow developers to put their APIs onto a global list that is viewable by everyone. This will allow developers who are searching for appropriate APIs to find reliable ones to use. It will also give the possibility for users to link to APIs on the global list to use in the promotion of their services.</p>
-        </article>
-      </div>
+            </div>
+            <div class="creds">
+                <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+            </div>
+        </footer>
     </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/S00133309" class="avatar"><img src="https://avatars3.githubusercontent.com/u/5436158?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/S00133309">S00133309</a> maintains <a href="https://github.com/S00133309/APIHealthCheck">API Health Check</a></p>
+    <div class="current-section">
+        <a href="#top">Scroll to top</a>
+        <a href="https://github.com/S00133309/APIHealthCheck/tarball/master" class="tar">tar</a><a href="https://github.com/S00133309/APIHealthCheck/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+        <p class="name"></p>
+    </div>
 
-
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/S00133309/APIHealthCheck/tarball/master" class="tar">tar</a><a href="https://github.com/S00133309/APIHealthCheck/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-  
 </body>
 </html>
