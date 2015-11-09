@@ -62,10 +62,11 @@
 				data : JSON.stringify(id),
 				dataType : 'json',
 				complete : function(data) {
-					if (data.responseJSON == id)
-						console.log("SUCCESS: ", data.responseJSON);
+					if (data.responseJSON != null)
+						alert("SUCCESS");
 					else
-						console.log("ERROR: ", data.responseJSON);
+						alert("ERROR");
+					console.log(data.responseJSON);
 				}
 			});
 		});
@@ -86,9 +87,10 @@
 				dataType : 'json',
 				complete : function(data) {
 					if (data.responseJSON != null)
-						console.log("SUCCESS: ", data.responseJSON);
+						alert("SUCCESS");
 					else
-						console.log("ERROR: ", data.responseJSON);
+						alert("ERROR");
+					console.log(data.responseJSON);
 				}
 			});
 		});
@@ -107,9 +109,10 @@
 				dataType : 'json',
 				complete : function(data) {
 					if (data.responseJSON != null)
-						console.log("SUCCESS: ", data.responseJSON);
+						alert("SUCCESS");
 					else
-						console.log("ERROR: ", data.responseJSON);
+						alert("ERROR");
+					console.log(data.responseJSON);
 				}
 			});
 		});
