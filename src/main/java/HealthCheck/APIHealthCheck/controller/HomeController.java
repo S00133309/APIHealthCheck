@@ -14,61 +14,62 @@ import org.springframework.web.servlet.ModelAndView;
 
 import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.ContactDAO;
+import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.model.API;
-import HealthCheck.APIHealthCheck.model.Contact;
+import HealthCheck.APIHealthCheck.model.URL;
 
 @RestController
 public class HomeController {
 
 	@Autowired
-	private ContactDAO contactDAO;
-
-	@Autowired
 	private APIDAO apiDAO;
 
-	/*
-	 * @RequestMapping(value = "/") public ModelAndView listContact(ModelAndView
-	 * model) throws IOException { List<Contact> listContact =
-	 * contactDAO.list(); model.addObject("listContact", listContact);
-	 * model.setViewName("index");
-	 * 
-	 * return model; }
-	 */
+	@Autowired
+	private URLDAO urlDAO;
 
 	@RequestMapping(value = "/")
 	public ModelAndView listContact(ModelAndView model) throws IOException {
-		List<API> listAPI = apiDAO.list();
-		model.addObject("listContact", listAPI);
 		model.setViewName("index");
 
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteContact/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api")
+	public ModelAndView listAPI(ModelAndView model) throws IOException {
+		List<API> listAPI = apiDAO.list();
+		List<URL> listURL = urlDAO.list();
+		model.addObject("listAPI", listAPI);
+		model.addObject("listURL", listURL);
+		model.setViewName("api");
+
+		return model;
+	}
+
+	@RequestMapping(value = "/deleteApi/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public int deleteContact(@PathVariable("id") int contact_id) {
-		int rowsAffected = contactDAO.delete(contact_id);
+	public int deleteApi(@PathVariable("id") int api_id) {
+		int rowsAffected = apiDAO.delete(api_id);
 		if (rowsAffected == 1)
-			return contact_id;
+			return api_id;
 		else
 			return -1;
 	}
 
-	@RequestMapping(value = "/editContact", method = RequestMethod.PUT)
-	public Contact editContact(@RequestBody Contact contact) {
-		int rowsAffected = contactDAO.saveOrUpdate(contact);
+	@RequestMapping(value = "/editApi", method = RequestMethod.PUT)
+	public API editApi(@RequestBody API api) {
+		int rowsAffected = apiDAO.saveOrUpdate(api);
 		if (rowsAffected == 1)
-			return contact;
+			return api;
 		else {
 			return null;
 		}
 	}
 
-	@RequestMapping(value = "/saveContact", method = RequestMethod.POST)
-	public Contact getSearchResultViaAjax(@RequestBody Contact contact) {
-		int rowsAffected = contactDAO.saveOrUpdate(contact);
+	@RequestMapping(value = "/saveApi", method = RequestMethod.POST)
+	public API saveApi(@RequestBody API api) {
+		int rowsAffected = apiDAO.saveOrUpdate(api);
 		if (rowsAffected == 1)
-			return contact;
+			return api;
 		else {
 			return null;
 		}

@@ -2,15 +2,15 @@ package HealthCheck.APIHealthCheck.model;
 
 public class URL {
 	private int id;
-	private int api_id;
+	private int apiId;
 	private String url;
 
 	public URL() {
 	}
 
-	public URL(int api_id, String url) {
+	public URL(int apiId, String url) {
 		this.url = url;
-		this.api_id = api_id;
+		this.apiId = apiId;
 	}
 
 	public int getId() {
@@ -18,7 +18,7 @@ public class URL {
 	}
 
 	public int getApiId() {
-		return api_id;
+		return apiId;
 	}
 
 	public String getUrl() {
@@ -33,7 +33,7 @@ public class URL {
 		this.url = url;
 	}
 
-	public void setApiId(int api_id) {
-		this.api_id = api_id;
+	public void setApiId(int apiId) {
+		this.apiId = apiId;
 	}
 }

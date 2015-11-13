@@ -9,113 +9,11 @@
 </head>
 <body>
 	<h1>Hello World!</h1>
-	<table>
-		<tr>
-			<!-- <th>Index</th> -->
-			<th>ID</th>
-			<th>Name</th>
-			<!--<th>Email</th>
-			<th>Address</th>
-			<th>Telephone</th> -->
-		</tr>
-		<c:forEach var="api" items="${listContact}" varStatus="status">
-			<tr>
-				<!-- 	<td>${status.index}</td>  -->
-				<td>${api.id}</td>
-				<td>${api.name}</td>
-				<!-- <td>${contact.email}</td>
-				<td>${contact.address}</td>
-				<td>${contact.telephone}</td> -->
-			</tr>
-		</c:forEach>
-	</table>
-
-	<button id="testDeleteButton">Delete</button>
-	<label id="testLabel"></label>
-	<input type="text" id="testInput" />
-	</br>
-	</br>
-	<button id="testEditButton">Edit</button>
-	<label id="testLabel2"></label>
-	<input id="idInput" placeholder="id"/>
-	<input id="nameInput2" placeholder="name"/>
-	<input id="emailInput2" placeholder="email"/>
-	<input id="addInput2" placeholder="address"/>
-	<input id="teleInput2" placeholder="telephone"/>
-	</br>
-	</br>
-	<button id="testCreateButton">New</button>
-	<label id="testLabel3"></label>
-	<input id="nameInput" placeholder="name"/>
-	<input id="emailInput" placeholder="email"/>
-	<input id="addInput" placeholder="address"/>
-	<input id="teleInput" placeholder="telephone"/>
+	<a href="api">API</a>
 </body>
 <script>
 	$(document).ready(function() {
-		$('#testDeleteButton').click(function() {
-			var id = $("#testInput").val();
-			$.ajax({
-				type : "DELETE",
-				contentType : "application/json",
-				'url' : "/APIHealthCheck/deleteContact/" + id,
-				data : JSON.stringify(id),
-				dataType : 'json',
-				complete : function(data) {
-					if (data.responseJSON != null)
-						alert("SUCCESS");
-					else
-						alert("ERROR");
-					console.log(data.responseJSON);
-				}
-			});
-		});
-
-		$('#testEditButton').click(function() {
-			
-			var contact = {}
-			contact["id"] = $('#idInput').val();
-			contact["name"] = $('#nameInput2').val();
-			contact["email"] = $('#emailInput2').val();
-			contact["address"] = $('#addInput2').val();
-			contact["telephone"] = $('#teleInput2').val();
-			$.ajax({
-				type : "PUT",
-				contentType : "application/json",
-				'url' : "/APIHealthCheck/editContact",
-				data : JSON.stringify(contact),
-				dataType : 'json',
-				complete : function(data) {
-					if (data.responseJSON != null)
-						alert("SUCCESS");
-					else
-						alert("ERROR");
-					console.log(data.responseJSON);
-				}
-			});
-		});
-
-		$('#testCreateButton').click(function() {
-			var contact = {}
-			contact["name"] = $('#nameInput').val();
-			contact["email"] = $('#emailInput').val();
-			contact["address"] = $('#addInput').val();
-			contact["telephone"] = $('#teleInput').val();
-			$.ajax({
-				type : "POST",
-				contentType : "application/json",
-				'url' : "/APIHealthCheck/saveContact",
-				data : JSON.stringify(contact),
-				dataType : 'json',
-				complete : function(data) {
-					if (data.responseJSON != null)
-						alert("SUCCESS");
-					else
-						alert("ERROR");
-					console.log(data.responseJSON);
-				}
-			});
-		});
+		
 	});
 </script>
 </html>

@@ -26,7 +26,7 @@ public class APIDAOImpl implements APIDAO {
 		if (api.getId() > 0) {
 			// update
 			String sql = "UPDATE api SET name=? WHERE api_id=?";
-			rowsAffected = jdbcTemplate.update(sql, api.getName());
+			rowsAffected = jdbcTemplate.update(sql, api.getName(), api.getId());
 		} else {
 			// insert
 			String sql = "INSERT INTO api (name)" + " VALUES (?)";

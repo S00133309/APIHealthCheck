@@ -4,8 +4,6 @@ import javax.sql.DataSource;
 
 import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.APIDAOImpl;
-import HealthCheck.APIHealthCheck.dao.ContactDAO;
-import HealthCheck.APIHealthCheck.dao.ContactDAOImpl;
 import HealthCheck.APIHealthCheck.dao.PersonDAO;
 import HealthCheck.APIHealthCheck.dao.PersonDAOImpl;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
@@ -22,53 +20,47 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages="HealthCheck.APIHealthCheck")
+@ComponentScan(basePackages = "HealthCheck.APIHealthCheck")
 @EnableWebMvc
-public class MvcConfiguration extends WebMvcConfigurerAdapter{
+public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
-	public ViewResolver getViewResolver(){
+	public ViewResolver getViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
-	
-	 @Bean
-	    public DataSource getDataSource() {
-	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	        dataSource.setDriverClassName("org.h2.Driver");
-	        dataSource.setUrl("jdbc:h2:C:\\Users\\User\\Desktop\\Java\\Workspace\\APIHealthCheck\\DB\\HealthCheckDB");
-	        dataSource.setUsername("sa");
-	        dataSource.setPassword("");
-	         
-	        return dataSource;
-	    }
-	     
-	    @Bean
-	    public ContactDAO getContactDAO() {
-	        return new ContactDAOImpl(getDataSource());
-	    }
-	    
-	    @Bean
-	    public PersonDAO getPersonDAO() {
-	        return new PersonDAOImpl(getDataSource());
-	    }
-	    
-	    @Bean
-	    public APIDAO getApiDAO() {
-	        return new APIDAOImpl(getDataSource());
-	    }
-	    
-	    @Bean
-	    public URLDAO getUrlDAO() {
-	        return new URLDAOImpl(getDataSource());
-	    }
 
-	
+	@Bean
+	public DataSource getDataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.h2.Driver");
+		dataSource.setUrl("jdbc:h2:C:\\Users\\User\\Desktop\\Java\\Workspace\\APIHealthCheck\\DB\\HealthCheckDB");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("");
+
+		return dataSource;
+	}
+
+	@Bean
+	public PersonDAO getPersonDAO() {
+		return new PersonDAOImpl(getDataSource());
+	}
+
+	@Bean
+	public APIDAO getApiDAO() {
+		return new APIDAOImpl(getDataSource());
+	}
+
+	@Bean
+	public URLDAO getUrlDAO() {
+		return new URLDAOImpl(getDataSource());
+	}
+
 }
