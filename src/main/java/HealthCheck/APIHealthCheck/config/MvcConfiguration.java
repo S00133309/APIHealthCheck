@@ -2,9 +2,15 @@ package HealthCheck.APIHealthCheck.config;
 
 import javax.sql.DataSource;
 
+import HealthCheck.APIHealthCheck.dao.APIDAO;
+import HealthCheck.APIHealthCheck.dao.APIDAOImpl;
 import HealthCheck.APIHealthCheck.dao.ContactDAO;
 import HealthCheck.APIHealthCheck.dao.ContactDAOImpl;
- 
+import HealthCheck.APIHealthCheck.dao.PersonDAO;
+import HealthCheck.APIHealthCheck.dao.PersonDAOImpl;
+import HealthCheck.APIHealthCheck.dao.URLDAO;
+import HealthCheck.APIHealthCheck.dao.URLDAOImpl;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +43,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    public DataSource getDataSource() {
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	        dataSource.setDriverClassName("org.h2.Driver");
-	        dataSource.setUrl("jdbc:h2:C:\\Users\\User\\Desktop\\Java\\DB\\HealthCheckDB");
+	        dataSource.setUrl("jdbc:h2:C:\\Users\\User\\Desktop\\Java\\Workspace\\APIHealthCheck\\DB\\HealthCheckDB");
 	        dataSource.setUsername("sa");
 	        dataSource.setPassword("");
 	         
@@ -47,6 +53,21 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    @Bean
 	    public ContactDAO getContactDAO() {
 	        return new ContactDAOImpl(getDataSource());
+	    }
+	    
+	    @Bean
+	    public PersonDAO getPersonDAO() {
+	        return new PersonDAOImpl(getDataSource());
+	    }
+	    
+	    @Bean
+	    public APIDAO getApiDAO() {
+	        return new APIDAOImpl(getDataSource());
+	    }
+	    
+	    @Bean
+	    public URLDAO getUrlDAO() {
+	        return new URLDAOImpl(getDataSource());
 	    }
 
 	

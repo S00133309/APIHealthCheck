@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.ContactDAO;
+import HealthCheck.APIHealthCheck.model.API;
 import HealthCheck.APIHealthCheck.model.Contact;
 
 @RestController
@@ -21,10 +23,22 @@ public class HomeController {
 	@Autowired
 	private ContactDAO contactDAO;
 
+	@Autowired
+	private APIDAO apiDAO;
+
+	/*
+	 * @RequestMapping(value = "/") public ModelAndView listContact(ModelAndView
+	 * model) throws IOException { List<Contact> listContact =
+	 * contactDAO.list(); model.addObject("listContact", listContact);
+	 * model.setViewName("index");
+	 * 
+	 * return model; }
+	 */
+
 	@RequestMapping(value = "/")
 	public ModelAndView listContact(ModelAndView model) throws IOException {
-		List<Contact> listContact = contactDAO.list();
-		model.addObject("listContact", listContact);
+		List<API> listAPI = apiDAO.list();
+		model.addObject("listContact", listAPI);
 		model.setViewName("index");
 
 		return model;
@@ -34,7 +48,7 @@ public class HomeController {
 	@ResponseBody
 	public int deleteContact(@PathVariable("id") int contact_id) {
 		int rowsAffected = contactDAO.delete(contact_id);
-		if(rowsAffected == 1)
+		if (rowsAffected == 1)
 			return contact_id;
 		else
 			return -1;

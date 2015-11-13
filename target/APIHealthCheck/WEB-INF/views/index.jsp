@@ -14,18 +14,18 @@
 			<!-- <th>Index</th> -->
 			<th>ID</th>
 			<th>Name</th>
-			<th>Email</th>
+			<!--<th>Email</th>
 			<th>Address</th>
-			<th>Telephone</th>
+			<th>Telephone</th> -->
 		</tr>
-		<c:forEach var="contact" items="${listContact}" varStatus="status">
+		<c:forEach var="api" items="${listContact}" varStatus="status">
 			<tr>
 				<!-- 	<td>${status.index}</td>  -->
-				<td>${contact.id}</td>
-				<td>${contact.name}</td>
-				<td>${contact.email}</td>
+				<td>${api.id}</td>
+				<td>${api.name}</td>
+				<!-- <td>${contact.email}</td>
 				<td>${contact.address}</td>
-				<td>${contact.telephone}</td>
+				<td>${contact.telephone}</td> -->
 			</tr>
 		</c:forEach>
 	</table>
