@@ -26,7 +26,7 @@ public class PersonDAOImpl implements PersonDAO {
 		if (person.getId() > 0) {
 			// update
 			String sql = "UPDATE person SET fname=?, sname=? WHERE person_id=?";
-			rowsAffected = jdbcTemplate.update(sql, person.getFname(), person.getSname());
+			rowsAffected = jdbcTemplate.update(sql, person.getFname(), person.getSname(), person.getId());
 		} else {
 			// insert
 			String sql = "INSERT INTO person (fname, sname)" + " VALUES (?, ?)";

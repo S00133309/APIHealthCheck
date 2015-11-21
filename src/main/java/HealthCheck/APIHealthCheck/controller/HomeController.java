@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import HealthCheck.APIHealthCheck.dao.APIDAO;
-import HealthCheck.APIHealthCheck.dao.ContactDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.model.API;
 import HealthCheck.APIHealthCheck.model.URL;
