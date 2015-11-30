@@ -8,6 +8,7 @@ import HealthCheck.APIHealthCheck.dao.PersonDAO;
 import HealthCheck.APIHealthCheck.dao.PersonDAOImpl;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAOImpl;
+import HealthCheck.APIHealthCheck.service.Timing;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -61,6 +62,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public URLDAO getUrlDAO() {
 		return new URLDAOImpl(getDataSource());
+	}
+	
+	@Bean
+	public Timing getTiming() {
+		return new Timing();
 	}
 
 }

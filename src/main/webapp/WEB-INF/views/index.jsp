@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>Hello World!</h1>
+	<p>${something}</p>
 	<a href="api">API</a>
 </body>
 <script>

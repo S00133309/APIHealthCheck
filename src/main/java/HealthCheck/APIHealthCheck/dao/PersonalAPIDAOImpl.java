@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-import HealthCheck.APIHealthCheck.model.Person;
 import HealthCheck.APIHealthCheck.model.PersonalAPI;
 
 public class PersonalAPIDAOImpl implements PersonalAPIDAO {
@@ -27,7 +26,8 @@ public class PersonalAPIDAOImpl implements PersonalAPIDAO {
 		if (personalApi.getId() > 0) {
 			// update
 			String sql = "UPDATE personal_api SET person_id=?, api_id=? WHERE pa_id=?";
-			rowsAffected = jdbcTemplate.update(sql, personalApi.getPersonId(), personalApi.getApiId(),personalApi.getId());
+			rowsAffected = jdbcTemplate.update(sql, personalApi.getPersonId(), personalApi.getApiId(),
+					personalApi.getId());
 		} else {
 			// insert
 			String sql = "INSERT INTO personal_api (person_id, sapi_idname)" + " VALUES (?, ?)";

@@ -16,6 +16,7 @@ import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.model.API;
 import HealthCheck.APIHealthCheck.model.URL;
+import HealthCheck.APIHealthCheck.service.Timing;
 
 @RestController
 public class HomeController {
@@ -26,10 +27,12 @@ public class HomeController {
 	@Autowired
 	private URLDAO urlDAO;
 
+	@Autowired
+	private Timing timing;
+
 	@RequestMapping(value = "/")
 	public ModelAndView listContact(ModelAndView model) throws IOException {
 		model.setViewName("index");
-
 		return model;
 	}
 
