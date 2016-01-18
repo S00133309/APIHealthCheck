@@ -1,36 +1,49 @@
 package HealthCheck.APIHealthCheck.service;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import HealthCheck.APIHealthCheck.dao.APIDAO;
 
 import HealthCheck.APIHealthCheck.model.API;
 
 public class Timing {
+	@Autowired
+	private APIDAO apiDAO;
 
-	private Timer timer = new Timer();
-	private Ping ping = new Ping();
-	private TimerTask task = new TimerTask() {
+	@Autowired
+	private Ping ping;
 
-		@Override
-		public void run() {
-			List<API> apis = ping.getNeededApis();
-			for (API api : apis) {
-				ping.pingApi(api);
-			}
-		}
-	};
+	private int count = 0;
+	private List<API> apis = new ArrayList<API>();
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 	public Timing() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 1);
-		calendar.set(Calendar.MINUTE, 0);
-		//calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + 1); FOR TESTING ONLY
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		long hourInMilliseconds = 3600000;
-		timer.scheduleAtFixedRate(task, calendar.getTime(), hourInMilliseconds);
+		scheduler.scheduleAtFixedRate(new Runnable() {
+
+			@Override
+			public void run() {
+				apis = apiDAO.list();
+				apis = ping.getNeededApis(apis);
+				for (API api : apis) {
+					count++;
+					ping.pingApi(api);
+				}
+				count++;
+			}
+		}, 1, 5, TimeUnit.SECONDS);
 	}
 
+	public int getList() {
+		return apis.size();
+	}
+	
+	public int getCount(){
+		return count;
+	}
 }

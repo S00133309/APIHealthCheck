@@ -65,7 +65,7 @@ public class URLDAOImpl implements URLDAO {
 
 	@Override
 	public URL get(int urlId) {
-		String sql = "SELECT * FROM url WHERE api_id=" + urlId;
+		String sql = "SELECT * FROM url WHERE url_id= " + urlId;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<URL>() {
 
 			@Override
@@ -84,4 +84,26 @@ public class URLDAOImpl implements URLDAO {
 
 		});
 	}
+
+	@Override
+	public List<URL> listByApi(int apiID) {
+		String sql = "SELECT * FROM url WHERE api_id= " + apiID;
+		List<URL> listContact = jdbcTemplate.query(sql, new RowMapper<URL>() {
+
+			@Override
+			public URL mapRow(ResultSet rs, int rowNum) throws SQLException {
+				URL aUrl = new URL();
+
+				aUrl.setId(rs.getInt("url_id"));
+				aUrl.setApiId(rs.getInt("api_id"));
+				aUrl.setUrl(rs.getString("url"));
+
+				return aUrl;
+			}
+
+		});
+
+		return listContact;
+	}
+
 }

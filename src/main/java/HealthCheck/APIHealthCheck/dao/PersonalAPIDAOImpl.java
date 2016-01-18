@@ -30,7 +30,7 @@ public class PersonalAPIDAOImpl implements PersonalAPIDAO {
 					personalApi.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO personal_api (person_id, sapi_idname)" + " VALUES (?, ?)";
+			String sql = "INSERT INTO personal_api (person_id, api_id)" + " VALUES (?, ?)";
 			rowsAffected = jdbcTemplate.update(sql, personalApi.getPersonId(), personalApi.getApiId());
 		}
 		return rowsAffected;

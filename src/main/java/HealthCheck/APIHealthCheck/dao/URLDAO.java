@@ -11,4 +11,6 @@ public interface URLDAO {
 	public URL get(int urlId);
 
 	public List<URL> list();
+	
+	public List<URL> listByApi(int apiID);
 }

@@ -33,6 +33,8 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public ModelAndView listContact(ModelAndView model) throws IOException {
 		model.setViewName("index");
+		model.addObject("count", timing.getCount());
+		model.addObject("size", timing.getList());
 		return model;
 	}
 

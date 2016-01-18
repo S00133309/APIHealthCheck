@@ -6,10 +6,12 @@ import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.APIDAOImpl;
 import HealthCheck.APIHealthCheck.dao.PersonDAO;
 import HealthCheck.APIHealthCheck.dao.PersonDAOImpl;
+import HealthCheck.APIHealthCheck.dao.ResultDAO;
+import HealthCheck.APIHealthCheck.dao.ResultDAOImpl;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAOImpl;
+import HealthCheck.APIHealthCheck.service.Ping;
 import HealthCheck.APIHealthCheck.service.Timing;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -65,8 +67,18 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
+	public ResultDAO getResultDAO() {
+		return new ResultDAOImpl(getDataSource());
+	}
+	
+	@Bean
 	public Timing getTiming() {
 		return new Timing();
+	}
+	
+	@Bean
+	public Ping getPing() {
+		return new Ping();
 	}
 
 }

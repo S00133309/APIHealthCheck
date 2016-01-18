@@ -9,12 +9,13 @@
 </head>
 <body>
 	<h1>Hello World!</h1>
-	<p>${something}</p>
 	<a href="api">API</a>
+	<p>Count : ${count}</p>
+	<p>Size : ${size}</p>
 </body>
 <script>
 	$(document).ready(function() {
-		
+
 	});
 </script>
 </html>

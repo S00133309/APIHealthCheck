@@ -3,60 +3,64 @@ package HealthCheck.APIHealthCheck.service;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import HealthCheck.APIHealthCheck.dao.APIDAO;
+import HealthCheck.APIHealthCheck.dao.ResultDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.model.API;
+import HealthCheck.APIHealthCheck.model.Result;
+import HealthCheck.APIHealthCheck.model.URL;
 
 public class Ping {
-	@Autowired
-	private APIDAO apiDAO;
 
 	@Autowired
 	private URLDAO urlDAO;
+	@Autowired
+	private ResultDAO resultDAO;
 
 	public Ping() {
 	}
 
-	public List<API> getNeededApis() {
-		List<API> apisUnchecked = apiDAO.list();
+	public List<API> getNeededApis(List<API> apisUnchecked) {
+		LocalDateTime now = LocalDateTime.now();
 		List<API> apisChecked = new ArrayList<API>();
-
+		int time = 0;
 		for (API api : apisUnchecked) {
-			// If Api hour is now, add it to the return list.
+			time = api.getTime();
+			if (time == now.getHour()) {
+				apisChecked.add(api);
+			}
 		}
-
 		return apisChecked;
 	}
 
 	public void pingApi(API api) {
-		// Get all the urls for that api and then ping them
-		List<URL> urls = new ArrayList<URL>();
-
+		List<URL> urls = urlDAO.listByApi(api.getId());
+		Calendar dateTime = Calendar.getInstance();
 		for (URL url : urls) {
 			try {
-				URL connectionUrl = new URL("api Url Here");// Note: This URL is
-															// a java.net url
-															// object
+				java.net.URL connectionUrl = new java.net.URL("api Url Here");
 				HttpURLConnection connection = (HttpURLConnection) connectionUrl.openConnection();
 				connection.connect();
-
-				// Get all the stuff we want here, eg. response code.
-				int code = connection.getResponseCode();
-				// Then store it in a result object and save that to db
-
+				Result result = new Result(url.getId(), connection.getResponseCode(),
+						new Time(dateTime.getTimeInMillis()), new Date(dateTime.getTimeInMillis()), "");
+				resultDAO.saveOrUpdate(result);
 			} catch (MalformedURLException e) {
-				// Log this as a failure because of bad url
+				Result result = new Result(url.getId(), 0, null, null, "Ping Failed due to bad URL.");
+				resultDAO.saveOrUpdate(result);
 			} catch (IOException e) {
-				// Log this as a failure because of reasons
-			}
-			// Get all the stuff we want here, eg. response code.
+				Result result = new Result(url.getId(), 0, null, null, "Ping Failed.");
+				resultDAO.saveOrUpdate(result);
 
+			}
 		}
 	}
+
 }
