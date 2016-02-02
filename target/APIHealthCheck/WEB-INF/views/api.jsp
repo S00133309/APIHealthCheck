@@ -14,6 +14,7 @@
 			<!-- <th>Index</th> -->
 			<th>ID</th>
 			<th>Name</th>
+			<th>Time</th>
 			<th>Urls</th>
 		</tr>
 		<c:forEach var="api" items="${listAPI}">
@@ -21,6 +22,7 @@
 				<!-- 	<td>${status.index}</td>  -->
 				<td>${api.id}</td>
 				<td>${api.name}</td>
+				<td>${api.time}</td>
 				<c:forEach var="url" items="${listURL}">
 					<c:if test="${url.apiId == api.id }">
 						<td>${url.url}</td>

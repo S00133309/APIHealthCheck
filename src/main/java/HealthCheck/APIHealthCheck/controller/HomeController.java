@@ -1,6 +1,7 @@
 package HealthCheck.APIHealthCheck.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import HealthCheck.APIHealthCheck.dao.APIDAO;
+import HealthCheck.APIHealthCheck.dao.APIResultDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.model.API;
+import HealthCheck.APIHealthCheck.model.APIResult;
+import HealthCheck.APIHealthCheck.model.GlobalViewData;
 import HealthCheck.APIHealthCheck.model.URL;
 import HealthCheck.APIHealthCheck.service.Timing;
 
@@ -28,13 +32,29 @@ public class HomeController {
 	private URLDAO urlDAO;
 
 	@Autowired
+	private APIResultDAO apiResultDAO;
+	
+	@Autowired
 	private Timing timing;
 
 	@RequestMapping(value = "/")
 	public ModelAndView listContact(ModelAndView model) throws IOException {
-		model.setViewName("index");
-		model.addObject("count", timing.getCount());
-		model.addObject("size", timing.getList());
+		List<API> listAPI = apiDAO.list();
+		List<GlobalViewData> listGlobalData = new ArrayList<GlobalViewData>();
+		GlobalViewData globalViewData;
+		List<APIResult> apiResults = apiResultDAO.list();
+		List<APIResult> apiResultsToGive;
+		for (API api : listAPI) {
+			apiResultsToGive = new ArrayList<APIResult>();
+			for (APIResult apiResult : apiResults) {
+				if(apiResult.getApiId() == api.getId())
+					apiResultsToGive.add(apiResult);
+			}
+			globalViewData = new GlobalViewData(api, apiResultsToGive);
+			listGlobalData.add(globalViewData);
+		}
+		model.addObject("data", listGlobalData);
+		model.setViewName("globalApiList");
 		return model;
 	}
 
@@ -42,10 +62,11 @@ public class HomeController {
 	public ModelAndView listAPI(ModelAndView model) throws IOException {
 		List<API> listAPI = apiDAO.list();
 		List<URL> listURL = urlDAO.list();
+		List<APIResult> apiResults = apiResultDAO.list();
 		model.addObject("listAPI", listAPI);
 		model.addObject("listURL", listURL);
+		model.addObject("listResults", apiResults);
 		model.setViewName("api");
-
 		return model;
 	}
 

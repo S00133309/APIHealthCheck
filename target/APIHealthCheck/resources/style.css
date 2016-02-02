@@ -1,0 +1,75 @@
+body {
+	background-color: #181818 !important;
+}
+
+#banner {
+	text-align: right;
+	margin-right: 5%;
+	margin-top: 2%;
+}
+
+#apiH1, #healthH1 {
+	font-size: 50px;
+	display: inline;
+}
+
+#apiH1 {
+	color: #9D9D9D;
+}
+
+#healthH1 {
+	color: #6ECD55;
+}
+
+#navBar {
+	border-radius: 0px !important;
+}
+
+#apiTable {
+	background-color: #0C0A0A;
+	border: 2px solid #000;
+	color: #FFF;
+}
+
+#apiTable thead td {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#healthHeart {
+	color: #6ECD55;
+}
+
+.hovering {
+	background-color: #000;
+	cursor: pointer;
+}
+
+.hideRow {
+	display: none;
+}
+
+.detailsText {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.detailRow {
+	text-align: center;
+}
+
+.moreDetails {
+	margin-top: 90%;
+}
+
+.apiUnstable {
+	color:#FEED01;
+}
+
+.apiHealthy {
+	color:#6ECD55;
+}
+
+.apiDown {
+	color:#F7464A;
+}

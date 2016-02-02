@@ -4,6 +4,7 @@ public class API {
 	private int id;
 	private String name;
 	private int time;
+	private String currentStatus;
 
 	public API() {
 	}
@@ -25,6 +26,10 @@ public class API {
 		return time;
 	}
 
+	public String getCurrentStatus() {
+		return currentStatus;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -35,5 +40,9 @@ public class API {
 
 	public void setTime(int time) {
 		this.time = time;
+	}
+
+	public void setCurrentStatus(String currentStatus) {
+		this.currentStatus = currentStatus;
 	}
 }

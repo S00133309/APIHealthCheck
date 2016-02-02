@@ -25,12 +25,12 @@ public class APIDAOImpl implements APIDAO {
 		int rowsAffected = 0;
 		if (api.getId() > 0) {
 			// update
-			String sql = "UPDATE api SET name=?, time=? WHERE api_id=?";
-			rowsAffected = jdbcTemplate.update(sql, api.getName(), api.getTime(), api.getId());
+			String sql = "UPDATE api SET name=?, time=?, currentstatus=? WHERE api_id=?";
+			rowsAffected = jdbcTemplate.update(sql, api.getName(), api.getTime(), api.getCurrentStatus(), api.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO api (name, time)" + " VALUES (?,?)";
-			rowsAffected = jdbcTemplate.update(sql, api.getName(), api.getTime());
+			String sql = "INSERT INTO api (name, time, currentstatus)" + " VALUES (?,?,?)";
+			rowsAffected = jdbcTemplate.update(sql, api.getName(), api.getTime(),api.getCurrentStatus());
 		}
 		return rowsAffected;
 	}
@@ -54,7 +54,7 @@ public class APIDAOImpl implements APIDAO {
 				anApi.setId(rs.getInt("api_id"));
 				anApi.setName(rs.getString("name"));
 				anApi.setTime(rs.getInt("time"));
-
+				anApi.setCurrentStatus(rs.getString("currentstatus"));
 				return anApi;
 			}
 
@@ -75,6 +75,7 @@ public class APIDAOImpl implements APIDAO {
 					api.setId(rs.getInt("api_id"));
 					api.setName(rs.getString("name"));
 					api.setTime(rs.getInt("time"));
+					api.setCurrentStatus(rs.getString("currentstatus"));
 					return api;
 				}
 

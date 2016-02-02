@@ -25,13 +25,13 @@ public class ResultDAOImpl implements ResultDAO {
 		int rowsAffected = 0;
 		if (result.getId() > 0) {
 			// update
-			String sql = "UPDATE personal_api SET url_id=?, response_code=?, time_pinged=?, date_pinged=?, note=? WHERE result_id=?";
+			String sql = "UPDATE result SET url_id=?, response_code=?, time_pinged=?, date_pinged=?, note=? WHERE result_id=?";
 			rowsAffected = jdbcTemplate.update(sql, result.getUrlId(), result.getResponseCode(), result.getTimePinged(),
 					result.getDatePinged(), result.getNote(), result.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO personal_api (url_id, response_code, time_pinged, date_pinged, note)"
-					+ " VALUES (?, ?)";
+			String sql = "INSERT INTO result (url_id, response_code, time_pinged, date_pinged, note)"
+					+ " VALUES (?, ?, ?, ?, ?)";
 			rowsAffected = jdbcTemplate.update(sql, result.getUrlId(), result.getResponseCode(), result.getTimePinged(),
 					result.getDatePinged(), result.getNote());
 		}

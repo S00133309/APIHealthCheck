@@ -10,8 +10,6 @@
 <body>
 	<h1>Hello World!</h1>
 	<a href="api">API</a>
-	<p>Count : ${count}</p>
-	<p>Size : ${size}</p>
 </body>
 <script>
 	$(document).ready(function() {

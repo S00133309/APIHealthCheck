@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 
 import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.APIDAOImpl;
+import HealthCheck.APIHealthCheck.dao.APIResultDAO;
+import HealthCheck.APIHealthCheck.dao.APIResultDAOImpl;
 import HealthCheck.APIHealthCheck.dao.PersonDAO;
 import HealthCheck.APIHealthCheck.dao.PersonDAOImpl;
 import HealthCheck.APIHealthCheck.dao.ResultDAO;
@@ -70,6 +72,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public ResultDAO getResultDAO() {
 		return new ResultDAOImpl(getDataSource());
 	}
+	@Bean
+	public APIResultDAO getApiResultDAO() {
+		return new APIResultDAOImpl(getDataSource());
+	}
 	
 	@Bean
 	public Timing getTiming() {
@@ -80,5 +86,4 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public Ping getPing() {
 		return new Ping();
 	}
-
 }
