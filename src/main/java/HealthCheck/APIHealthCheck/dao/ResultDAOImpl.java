@@ -55,6 +55,7 @@ public class ResultDAOImpl implements ResultDAO {
 				Result aResult = new Result();
 
 				aResult.setId(rs.getInt("result_id"));
+				aResult.setUrlId(rs.getInt("url_id"));
 				aResult.setResponseCode(rs.getInt("response_code"));
 				aResult.setTimePinged(rs.getTime("time_pinged"));
 				aResult.setDatePinged(rs.getDate("date_pinged"));
@@ -79,6 +80,7 @@ public class ResultDAOImpl implements ResultDAO {
 					Result aResult = new Result();
 					aResult.setId(rs.getInt("result_id"));
 					aResult.setResponseCode(rs.getInt("response_code"));
+					aResult.setUrlId(rs.getInt("url_id"));
 					aResult.setTimePinged(rs.getTime("time_pinged"));
 					aResult.setDatePinged(rs.getDate("date_pinged"));
 					aResult.setNote(rs.getString("note"));

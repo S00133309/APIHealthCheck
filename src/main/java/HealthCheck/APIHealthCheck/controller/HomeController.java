@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import HealthCheck.APIHealthCheck.dao.APIDAO;
 import HealthCheck.APIHealthCheck.dao.APIResultDAO;
+import HealthCheck.APIHealthCheck.dao.ResultDAO;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
 import HealthCheck.APIHealthCheck.model.API;
 import HealthCheck.APIHealthCheck.model.APIResult;
 import HealthCheck.APIHealthCheck.model.GlobalViewData;
+import HealthCheck.APIHealthCheck.model.Result;
 import HealthCheck.APIHealthCheck.model.URL;
 import HealthCheck.APIHealthCheck.service.Timing;
 
@@ -35,10 +37,13 @@ public class HomeController {
 	private APIResultDAO apiResultDAO;
 	
 	@Autowired
+	private ResultDAO resultDAO;
+	
+	@Autowired
 	private Timing timing;
 
 	@RequestMapping(value = "/")
-	public ModelAndView listContact(ModelAndView model) throws IOException {
+	public ModelAndView globalList(ModelAndView model) throws IOException {
 		List<API> listAPI = apiDAO.list();
 		List<GlobalViewData> listGlobalData = new ArrayList<GlobalViewData>();
 		GlobalViewData globalViewData;
@@ -55,6 +60,25 @@ public class HomeController {
 		}
 		model.addObject("data", listGlobalData);
 		model.setViewName("globalApiList");
+		return model;
+	}
+	
+	@RequestMapping(value = "/details/{id}")
+	public ModelAndView apiDetails(@PathVariable("id") int api_id, ModelAndView model) throws IOException {
+		API api = apiDAO.get(api_id);
+		List<URL> urls = urlDAO.listByApi(api.getId());
+		List<Result> results = resultDAO.list();
+		List<Result> resultsOfAPI = new ArrayList<Result>();
+		for (URL url : urls) {
+			for (Result result : results) {
+				if(result.getUrlId() == url.getId())
+					resultsOfAPI.add(result);
+			}
+		}
+		model.addObject("api",api);
+		model.addObject("urls",urls);
+		model.addObject("results", resultsOfAPI);
+		model.setViewName("apiDetails");
 		return model;
 	}
 

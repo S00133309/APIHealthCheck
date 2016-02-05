@@ -52,10 +52,10 @@ public class Ping {
 						new Time(dateTime.getTimeInMillis()), new Date(dateTime.getTimeInMillis()), "");
 				resultsToSave.add(result);
 			} catch (MalformedURLException e) {
-				Result result = new Result(url.getId(), 0, null, null, "Ping Failed due to bad URL.");
+				Result result = new Result(url.getId(), 0, new Time(dateTime.getTimeInMillis()), new Date(dateTime.getTimeInMillis()), "Ping Failed due to bad URL.");
 				resultsToSave.add(result);
 			} catch (IOException e) {
-				Result result = new Result(url.getId(), 0, null, null, "Ping Failed.");
+				Result result = new Result(url.getId(), 0, new Time(dateTime.getTimeInMillis()), new Date(dateTime.getTimeInMillis()), "Ping Failed.");
 				resultsToSave.add(result);
 			}
 		}

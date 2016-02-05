@@ -25,19 +25,46 @@ body {
 	border-radius: 0px !important;
 }
 
-#apiTable {
+#apiTable, #urlTable, #resultsTable {
 	background-color: #0C0A0A;
 	border: 2px solid #000;
 	color: #FFF;
 }
 
-#apiTable thead td {
+#urlTable, #resultsTable {
+	margin-top: 10px;
+	width: 100%;
+}
+
+#urlTable tbody tr, #resultsTable tbody tr {
+	border-top: 1px #FFF solid;
+}
+
+#urlTable tbody tr td, #resultsTable tbody tr td {
+	padding-top: 1%;
+}
+
+#urlTable thead td {
+	text-align: center;
+}
+
+#apiTable thead td, #urlTable thead td, #resultsTable thead td {
 	font-size: 20px;
 	font-weight: bold;
 }
 
 #healthHeart {
 	color: #6ECD55;
+}
+
+#apiName {
+	color: #FFF;
+	text-align: center;
+}
+
+.detailsContainers {
+	background-color: rgb(8, 8, 8);
+	border: 1px solid rgb(34, 34, 34);
 }
 
 .hovering {
@@ -63,13 +90,33 @@ body {
 }
 
 .apiUnstable {
-	color:#FEED01;
+	color: #FEED01;
 }
 
 .apiHealthy {
-	color:#6ECD55;
+	color: #6ECD55;
 }
 
 .apiDown {
+	color: #F7464A;
+}
+
+.navLogin {
+	font-weight: bold;
+	background-color: rgba(55, 56, 94, 0.4);
+}
+
+.tablePieData {
+	border-left: 1px solid rgb(34, 34, 34);
+	border-right: 1px solid rgb(34, 34, 34);
+}
+
+.chevrons {
+	margin-right: 2%;
+}
+.codeRed{
 	color:#F7464A;
+}
+.codeGreen{
+	color:#6ECD55;
 }

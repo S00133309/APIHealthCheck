@@ -25,10 +25,15 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/APIHealthCheck">Home</a></li>
-						<li><a href="#">Page 1</a></li>
-						<li><a href="#">Page 2</a></li>
-						<li><a href="#">Page 3</a></li>
+						<li><a href="/APIHealthCheck/">Home</a></li>
+						<li class="active"><a href="/APIHealthCheck/">Global
+								List</a></li>
+						<li><a href="#">Personal List</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact Us</a></li>
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+						<li class="navLogin"><a href="#">Login</a></li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -44,22 +49,25 @@
 						<tr>
 							<td>Name</td>
 							<td>Current Status</td>
-							<td></td>
+							<td class="pull-right"><input id="searchBox" type="text"
+								class="form-control" placeholder="Search"></td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="globalViewData" items="${data}">
 							<tr id="${globalViewData.id}">
-								<td>${globalViewData.name}</td>
+								<td id="${globalViewData.id}Name">${globalViewData.name}</td>
 								<td class="api${globalViewData.currentStatus}">${globalViewData.currentStatus}</td>
-								<td><span class="glyphicon glyphicon-chevron-up"></span></td>
+								<td><span
+									class="glyphicon glyphicon-chevron-up pull-right chevrons"></span></td>
 							</tr>
 							<tr id="${globalViewData.id}Hidden" class="hideRow">
 								<td colspan=3>
 									<div class="container">
 										<div class="row detailRow">
 											<p class="col-lg-4 detailsText">Last 10 Results</p>
-											<p class="col-lg-3 detailsText">% Up/Down/Unstable</p>
+											<p class="col-lg-3 detailsText tablePieData">%
+												Up/Down/Unstable</p>
 											<p class="col-lg-3 detailsText">Total Results</p>
 										</div>
 										<div class="row detailRow">
@@ -67,7 +75,7 @@
 												<canvas id="${globalViewData.id}HistoryChart" width="300"
 													height="200"></canvas>
 											</div>
-											<div class="col-lg-3">
+											<div class="col-lg-3 tablePieData">
 												<canvas id="${globalViewData.id}PercentageChart" width="200"
 													height="200"></canvas>
 											</div>
@@ -76,8 +84,9 @@
 													height="200"></canvas>
 											</div>
 											<div class="col-lg-2">
-												<button class="btn btn-default moreDetails">More
-													Details</button>
+												<a href="details/${globalViewData.id}"
+													data-apiId="${globalViewData.id}"
+													class="btn btn-default moreDetails">More Details</a>
 											</div>
 										</div>
 
@@ -103,39 +112,42 @@
 			function() {
 				var data = new Array();
 				var dataObject;
-				<c:forEach items="${data}" var="globalViewData" varStatus="status"> 
+				<c:forEach items="${data}" var="globalViewData" varStatus="status">
 				dataObject = new Object();
-				dataObject.id = ${globalViewData.id};
+				dataObject.id = ${globalViewData.id}
+				;
 				dataObject.name = "${globalViewData.name}";
 				dataObject.currentStatus = "${globalViewData.currentStatus}";
-				
+
 				dataObject.lastTenResultStatus = new Array();
-				<c:forEach items="${globalViewData.lastTenResultStatus}" var="status"> 
+				<c:forEach items="${globalViewData.lastTenResultStatus}" var="status">
 				var i = "${status}";
 				dataObject.lastTenResultStatus.push(i);
-				</c:forEach> 
-				
+				</c:forEach>
+
 				dataObject.lastTenDates = new Array();
-				<c:forEach items="${globalViewData.lastTenDates}" var="date"> 
+				<c:forEach items="${globalViewData.lastTenDates}" var="date">
 				var d = new Date("${date}");
-				var i = d.getDate()+ "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+				var i = d.getDate() + "-" + (d.getMonth() + 1) + "-"
+						+ d.getFullYear();
 				dataObject.lastTenDates.push(i);
-				</c:forEach> 
-				
-				dataObject.totalUp = ${globalViewData.totalUp};
-				dataObject.totalDown = ${globalViewData.totalDown};
-				dataObject.totalUnstable = ${globalViewData.totalUnstable};
+				</c:forEach>
+
+				dataObject.totalUp = ${globalViewData.totalUp}
+				;
+				dataObject.totalDown = ${globalViewData.totalDown}
+				;
+				dataObject.totalUnstable = ${globalViewData.totalUnstable}
+				;
 				data.push(dataObject);
-				</c:forEach> 
+				</c:forEach>
 				$("#apiTable > tbody > tr").mouseover(function() {
 					$(this).addClass("hovering");
 				});
 				$("#apiTable > tbody > tr").mouseout(function() {
 					$(this).removeClass("hovering");
 				});
-	
-	
-	$("#apiTable > tbody > tr").click(
+				$("#apiTable > tbody > tr").click(
 						function() {
 							var id = $(this).attr('id');
 							if ($(this).find('td:last > span').hasClass(
@@ -156,6 +168,20 @@
 								$("#" + id + "Hidden").hide();
 							}
 						});
+			});
+
+	$('#searchBox').keyup(
+			function() {
+				var searchPhrase = $('#searchBox').val().toUpperCase();
+				var rows = $("#apiTable > tbody > tr:even");
+				for (var int = 0; int < rows.length; int++) {
+					var name = $('#' + rows[int].getAttribute('id') + 'Name')
+							.html().toUpperCase();
+					if (name.indexOf(searchPhrase) == -1)
+						$('#' + rows[int].getAttribute('id')).hide();
+					else
+						$('#' + rows[int].getAttribute('id')).show();
+				}
 			});
 
 	function showRow(data) {
