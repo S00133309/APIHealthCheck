@@ -36,4 +36,5 @@ public class URL {
 	public void setApiId(int apiId) {
 		this.apiId = apiId;
 	}
+
 }

@@ -8,6 +8,8 @@ import HealthCheck.APIHealthCheck.dao.APIResultDAO;
 import HealthCheck.APIHealthCheck.dao.APIResultDAOImpl;
 import HealthCheck.APIHealthCheck.dao.PersonDAO;
 import HealthCheck.APIHealthCheck.dao.PersonDAOImpl;
+import HealthCheck.APIHealthCheck.dao.PersonalAPIDAO;
+import HealthCheck.APIHealthCheck.dao.PersonalAPIDAOImpl;
 import HealthCheck.APIHealthCheck.dao.ResultDAO;
 import HealthCheck.APIHealthCheck.dao.ResultDAOImpl;
 import HealthCheck.APIHealthCheck.dao.URLDAO;
@@ -46,7 +48,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:C:\\Users\\User\\Desktop\\Java\\Workspace\\APIHealthCheck\\DB\\HealthCheckDB");
+		//Server -->
+		dataSource.setUrl("jdbc:h2:C:\\Users\\Administrator\\Desktop\\DB\\HealthCheckDB");
+		//dataSource.setUrl("jdbc:h2:C:\\Users\\User\\Desktop\\Java\\Workspace\\APIHealthCheck\\DB\\HealthCheckDB");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 
@@ -63,6 +67,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		return new APIDAOImpl(getDataSource());
 	}
 
+	@Bean
+	public PersonalAPIDAO getPersonalAPIDAO() {
+		return new PersonalAPIDAOImpl(getDataSource());
+	}
+	
 	@Bean
 	public URLDAO getUrlDAO() {
 		return new URLDAOImpl(getDataSource());

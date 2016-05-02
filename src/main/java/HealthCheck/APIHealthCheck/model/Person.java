@@ -2,6 +2,8 @@ package HealthCheck.APIHealthCheck.model;
 
 public class Person {
 	private int id;
+	private String email;
+	private String password;
 	private String fname;
 	private String sname;
 
@@ -21,6 +23,14 @@ public class Person {
 		return fname;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	public String getSname() {
 		return sname;
 	}
@@ -31,6 +41,14 @@ public class Person {
 
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setSname(String sname) {

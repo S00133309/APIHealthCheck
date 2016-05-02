@@ -25,12 +25,12 @@ public class PersonDAOImpl implements PersonDAO {
 		int rowsAffected = 0;
 		if (person.getId() > 0) {
 			// update
-			String sql = "UPDATE person SET fname=?, sname=? WHERE person_id=?";
-			rowsAffected = jdbcTemplate.update(sql, person.getFname(), person.getSname(), person.getId());
+			String sql = "UPDATE person SET fname=?, sname=?, email=?, password=? WHERE person_id=?";
+			rowsAffected = jdbcTemplate.update(sql, person.getFname(), person.getSname(), person.getEmail(), person.getPassword(), person.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO person (fname, sname)" + " VALUES (?, ?)";
-			rowsAffected = jdbcTemplate.update(sql, person.getFname(), person.getSname());
+			String sql = "INSERT INTO person (fname, sname, email, password)" + " VALUES (?, ?, ?, ?)";
+			rowsAffected = jdbcTemplate.update(sql, person.getFname(), person.getSname(), person.getEmail(), person.getPassword());
 		}
 		return rowsAffected;
 	}
@@ -54,6 +54,8 @@ public class PersonDAOImpl implements PersonDAO {
 				aPerson.setId(rs.getInt("person_id"));
 				aPerson.setFname(rs.getString("fname"));
 				aPerson.setSname(rs.getString("sname"));
+				aPerson.setEmail(rs.getString("email"));
+				aPerson.setPassword(rs.getString("password"));
 
 				return aPerson;
 			}
@@ -75,6 +77,8 @@ public class PersonDAOImpl implements PersonDAO {
 					person.setId(rs.getInt("person_id"));
 					person.setFname(rs.getString("fname"));
 					person.setSname(rs.getString("sname"));
+					person.setEmail(rs.getString("email"));
+					person.setPassword(rs.getString("password"));
 					return person;
 				}
 

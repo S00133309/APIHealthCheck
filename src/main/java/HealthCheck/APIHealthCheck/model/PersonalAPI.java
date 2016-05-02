@@ -12,7 +12,7 @@ public class PersonalAPI {
 		this.personId = personId;
 		this.apiId = apiId;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -24,7 +24,7 @@ public class PersonalAPI {
 	public int getApiId() {
 		return apiId;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}

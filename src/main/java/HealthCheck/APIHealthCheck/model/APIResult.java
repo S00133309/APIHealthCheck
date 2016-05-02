@@ -7,6 +7,7 @@ public class APIResult {
 	private int apiId;
 	private Date date;
 	private String status;
+	private int paId;
 
 	public APIResult() {
 	}
@@ -26,6 +27,10 @@ public class APIResult {
 	public String getStatus() {
 		return status;
 	}
+	
+	public int getPaId() {
+		return paId;
+	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -41,5 +46,9 @@ public class APIResult {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public void setPaId(int paId) {
+		this.paId = paId;
 	}
 }

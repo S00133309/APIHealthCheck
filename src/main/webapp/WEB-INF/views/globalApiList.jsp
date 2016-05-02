@@ -25,15 +25,15 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="/APIHealthCheck/">Home</a></li>
-						<li class="active"><a href="/APIHealthCheck/">Global
-								List</a></li>
-						<li><a href="#">Personal List</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact Us</a></li>
+						<li><a href="/APIHealthCheck">Home</a></li>
+						<li class="active"><a href="/APIHealthCheck/globalList">Global List</a></li>
+						<li><a id="personalListLink">Personal List</a></li>
+						<li><a href="/APIHealthCheck/about/">About</a></li>
+						<li><a href="/APIHealthCheck/contact/">Contact Us</a></li>
 					</ul>
 					<ul class="nav navbar-nav pull-right">
-						<li class="navLogin"><a href="#">Login</a></li>
+						<li class="navLogin"><a id="loginLink"
+							href="/APIHealthCheck/login/">Login</a></li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -49,8 +49,101 @@
 						<tr>
 							<td>Name</td>
 							<td>Current Status</td>
-							<td class="pull-right"><input id="searchBox" type="text"
-								class="form-control" placeholder="Search"></td>
+							<td class="pull-right">
+								<div class="row">
+									<button id="btnModalTrigger" class="btn btn-success col-xs-2"
+										data-toggle="modal" data-target="#addModal">
+										<span class="glyphicon glyphicon-plus"></span>
+									</button>
+									<!-- Modal -->
+									<div id="addModal" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">Add New API</h4>
+												</div>
+												<div class="modal-body">
+													<div>
+														<form action="" method="post">
+															<div class="row">
+																<label for="apiName" class="col-xs-4">API Name</label>
+																<div class="col-xs-8">
+																	<input id="apiName" type="text" class="form-control"
+																		placeholder="API Name" required>
+																</div>
+															</div>
+															<div class="row">
+																<label for="apiTime" class="col-xs-4">API Test
+																	Time</label>
+																<div class="col-xs-8">
+																	<select id="apiTime" class="form-control">
+																		<option value="1">1 AM</option>
+																		<option value="2">2 AM</option>
+																		<option value="3">3 AM</option>
+																		<option value="4">4 AM</option>
+																		<option value="5">5 AM</option>
+																		<option value="6">6 AM</option>
+																		<option value="7">7 AM</option>
+																		<option value="8">8 AM</option>
+																		<option value="9">9 AM</option>
+																		<option value="10">10 AM</option>
+																		<option value="11">11 AM</option>
+																		<option value="12">12 AM</option>
+																		<option value="13">1 PM</option>
+																		<option value="14">2 PM</option>
+																		<option value="15">3 PM</option>
+																		<option value="16">4 PM</option>
+																		<option value="17">5 PM</option>
+																		<option value="18">6 PM</option>
+																		<option value="19">7 PM</option>
+																		<option value="20">8 PM</option>
+																		<option value="21">9 PM</option>
+																		<option value="22">10 PM</option>
+																		<option value="23">11 PM</option>
+																		<option value="24">12 PM</option>
+																	</select>
+																</div>
+															</div>
+															<div class="row">
+																<table id="urlAddTable">
+																	<thead>
+																		<td>URLs</td>
+																		<td></td>
+																	</thead>
+																	<tbody id="tableAddUrlsBody">
+																		<tr>
+																			<td><input id=urlToAdd type="text"
+																				class="form-control" placeholder="URL" required></td>
+																			<td><button id="btnAddUrl" type="button"
+																					class="btn btn-success">
+																					<span class="glyphicon glyphicon-plus"></span>
+																				</button></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</form>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button id="btnAddApi" type="button"
+														class="btn btn-success">Add</button>
+													<button type="button" class="btn btn-danger"
+														data-dismiss="modal">Close</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--End Modal -->
+									<div class="col-xs-10">
+										<input id="searchBox" type="text" class="form-control"
+											placeholder="Search">
+									</div>
+								</div>
+							</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -108,67 +201,173 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script>
-	$(document).ready(
-			function() {
-				var data = new Array();
-				var dataObject;
-				<c:forEach items="${data}" var="globalViewData" varStatus="status">
-				dataObject = new Object();
-				dataObject.id = ${globalViewData.id}
-				;
-				dataObject.name = "${globalViewData.name}";
-				dataObject.currentStatus = "${globalViewData.currentStatus}";
+	$(document)
+			.ready(
+					function() {
+						var personalListLink = $('#personalListLink');
+						var name = "loggedUser";
+						var c = getCookie(name);
+						if (c.length > 0) {
+							c = JSON.parse(c);
+							personalListLink.attr("href",
+									"/APIHealthCheck/personal/" + c.id);
+							var btn = $('#loginLink');
+							btn.attr("href", "");
+							btn.empty();
+							btn.text("Logout " + c.fname + "?");
+							$('#btnModalTrigger').show();
 
-				dataObject.lastTenResultStatus = new Array();
-				<c:forEach items="${globalViewData.lastTenResultStatus}" var="status">
-				var i = "${status}";
-				dataObject.lastTenResultStatus.push(i);
-				</c:forEach>
+							btn
+									.click(function() {
+										var result = confirm("Are you sure you want to logout?");
+										if (result) {
+											document.cookie = "loggedUser=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/";
+											location.reload(true);
+										}
+									})
+						} else {
+							personalListLink.attr("href",
+									"/APIHealthCheck/login");
+							$('#btnModalTrigger').hide();
+						}
 
-				dataObject.lastTenDates = new Array();
-				<c:forEach items="${globalViewData.lastTenDates}" var="date">
-				var d = new Date("${date}");
-				var i = d.getDate() + "-" + (d.getMonth() + 1) + "-"
-						+ d.getFullYear();
-				dataObject.lastTenDates.push(i);
-				</c:forEach>
+						function getCookie(cname) {
+							var name = cname + "=";
+							var ca = document.cookie.split(';');
+							for (var i = 0; i < ca.length; i++) {
+								var c = ca[i].trim();
+								if (c.indexOf(name) == 0)
+									return c.substring(name.length, c.length);
+							}
+							return "";
+						}
 
-				dataObject.totalUp = ${globalViewData.totalUp}
-				;
-				dataObject.totalDown = ${globalViewData.totalDown}
-				;
-				dataObject.totalUnstable = ${globalViewData.totalUnstable}
-				;
-				data.push(dataObject);
-				</c:forEach>
-				$("#apiTable > tbody > tr").mouseover(function() {
-					$(this).addClass("hovering");
-				});
-				$("#apiTable > tbody > tr").mouseout(function() {
-					$(this).removeClass("hovering");
-				});
-				$("#apiTable > tbody > tr").click(
-						function() {
-							var id = $(this).attr('id');
-							if ($(this).find('td:last > span').hasClass(
-									"glyphicon-chevron-up")) {
-								$(this).find('td:last > span').removeClass(
-										"glyphicon-chevron-up").addClass(
-										"glyphicon-chevron-down");
-								for (var int = 0; int < data.length; int++) {
-									if (data[int].id == id) {
-										showRow(data[int]);
-									}
+						var data = new Array();
+						var dataObject;
+						<c:forEach items="${data}" var="globalViewData" varStatus="status">
+						dataObject = new Object();
+						dataObject.id = ${globalViewData.id};
+						dataObject.name = "${globalViewData.name}";
+						dataObject.currentStatus = "${globalViewData.currentStatus}";
+
+						dataObject.lastTenResultStatus = new Array();
+						<c:forEach items="${globalViewData.lastTenResultStatus}" var="status">
+						var i = "${status}";
+						dataObject.lastTenResultStatus.push(i);
+						</c:forEach>
+
+						dataObject.lastTenDates = new Array();
+						<c:forEach items="${globalViewData.lastTenDates}" var="date">
+						var d = new Date("${date}");
+						var i = d.getDate() + "-" + (d.getMonth() + 1) + "-"
+								+ d.getFullYear();
+						dataObject.lastTenDates.push(i);
+						</c:forEach>
+
+						dataObject.totalUp = ${globalViewData.totalUp};
+						dataObject.totalDown = ${globalViewData.totalDown};
+						dataObject.totalUnstable = ${globalViewData.totalUnstable};
+						data.push(dataObject);
+						</c:forEach>
+						$("#apiTable > tbody > tr").mouseover(function() {
+							$(this).addClass("hovering");
+						});
+						$("#apiTable > tbody > tr").mouseout(function() {
+							$(this).removeClass("hovering");
+						});
+						$("#apiTable > tbody > tr")
+								.click(
+										function() {
+											var id = $(this).attr('id');
+											if ($(this)
+													.find('td:last > span')
+													.hasClass(
+															"glyphicon-chevron-up")) {
+												$(this)
+														.find('td:last > span')
+														.removeClass(
+																"glyphicon-chevron-up")
+														.addClass(
+																"glyphicon-chevron-down");
+												for (var int = 0; int < data.length; int++) {
+													if (data[int].id == id) {
+														showRow(data[int]);
+													}
+												}
+
+											} else {
+												$(this)
+														.find('td:last > span')
+														.removeClass(
+																"glyphicon-chevron-down")
+														.addClass(
+																"glyphicon-chevron-up");
+												$("#" + id + "Hidden").hide();
+											}
+										});
+					});
+
+	$('#btnAddUrl')
+			.click(
+					function() {
+						var url = $('#urlToAdd').val();
+						var tableBody = $('#tableAddUrlsBody');
+						var btnEnd = "<button type='button' class='btn btn-danger' onclick='btnRemoveClick(this)'><span class='glyphicon glyphicon-minus'></span></button>"
+						tableBody.append("<tr><td>" + url + "</td><td>"
+								+ btnEnd + "</td></tr>");
+
+					});
+	function btnRemoveClick(callerElement) {
+		$(callerElement).parent().parent().remove();
+	}
+
+	$('#btnAddApi').click(function() {
+		var api = {};
+		api["name"] = $('#apiName').val();
+		api["time"] = $('#apiTime').find('option:selected').val();
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			'url' : "/APIHealthCheck/saveApi",
+			data : JSON.stringify(api),
+			dataType : 'json',
+			complete : function(data) {
+				if (data.responseJSON != null) {
+					api = data.responseJSON;
+					var urlCount = 0;
+					var rowCount = 0;
+					var rows = $("#urlAddTable > tbody > tr");
+					for (var int = 1; int < rows.length; int++) {
+						rowCount++;
+						var url = {}
+						var tds = rows[int].children;
+						url["url"] = tds[0].innerHTML;
+						url["apiId"] = api.id;
+						$.ajax({
+							type : "POST",
+							contentType : "application/json",
+							'url' : "/APIHealthCheck/saveURL",
+							data : JSON.stringify(url),
+							dataType : 'json',
+							complete : function(data) {
+								if (data.responseJSON != null) {
+									urlCount++;
 								}
-
-							} else {
-								$(this).find('td:last > span').removeClass(
-										"glyphicon-chevron-down").addClass(
-										"glyphicon-chevron-up");
-								$("#" + id + "Hidden").hide();
 							}
 						});
-			});
+					}
+					if (urlCount == rowCount) {
+						alert("Succesfully Added API");
+						$('#addModal').hide();
+					} else {
+						alert("Sorry something went wrong when adding urls");
+					}
+				} else {
+					alert("Sorry something went wrong when adding API");
+				}
+			}
+		});
+	});
 
 	$('#searchBox').keyup(
 			function() {

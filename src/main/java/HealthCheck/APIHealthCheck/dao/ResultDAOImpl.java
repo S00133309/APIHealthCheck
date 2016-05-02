@@ -25,15 +25,15 @@ public class ResultDAOImpl implements ResultDAO {
 		int rowsAffected = 0;
 		if (result.getId() > 0) {
 			// update
-			String sql = "UPDATE result SET url_id=?, response_code=?, time_pinged=?, date_pinged=?, note=? WHERE result_id=?";
+			String sql = "UPDATE result SET url_id=?, response_code=?, time_pinged=?, date_pinged=?, note=?, pa_id=? WHERE result_id=?";
 			rowsAffected = jdbcTemplate.update(sql, result.getUrlId(), result.getResponseCode(), result.getTimePinged(),
-					result.getDatePinged(), result.getNote(), result.getId());
+					result.getDatePinged(), result.getNote(), result.getPaId(), result.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO result (url_id, response_code, time_pinged, date_pinged, note)"
-					+ " VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO result (url_id, response_code, time_pinged, date_pinged, note, pa_id)"
+					+ " VALUES (?, ?, ?, ?, ?, ?)";
 			rowsAffected = jdbcTemplate.update(sql, result.getUrlId(), result.getResponseCode(), result.getTimePinged(),
-					result.getDatePinged(), result.getNote());
+					result.getDatePinged(),  result.getNote(), result.getPaId());
 		}
 		return rowsAffected;
 	}
@@ -60,7 +60,7 @@ public class ResultDAOImpl implements ResultDAO {
 				aResult.setTimePinged(rs.getTime("time_pinged"));
 				aResult.setDatePinged(rs.getDate("date_pinged"));
 				aResult.setNote(rs.getString("note"));
-
+				aResult.setPaId(rs.getInt("pa_id"));
 				return aResult;
 			}
 
@@ -84,6 +84,7 @@ public class ResultDAOImpl implements ResultDAO {
 					aResult.setTimePinged(rs.getTime("time_pinged"));
 					aResult.setDatePinged(rs.getDate("date_pinged"));
 					aResult.setNote(rs.getString("note"));
+					aResult.setPaId(rs.getInt("pa_id"));
 					return aResult;
 				}
 

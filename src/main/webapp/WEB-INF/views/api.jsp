@@ -25,7 +25,12 @@
 				<td>${api.time}</td>
 				<c:forEach var="url" items="${listURL}">
 					<c:if test="${url.apiId == api.id }">
-						<td>${url.url}</td>
+						<td>URL ID: ${url.id}</td>
+						<c:forEach var="result" items="${listResults}">
+					<c:if test="${result.urlId == url.id }">
+						<td>Result PaId: ${result.paId}</td>
+					</c:if>
+				</c:forEach>
 					</c:if>
 				</c:forEach>
 			</tr>

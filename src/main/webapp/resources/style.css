@@ -2,6 +2,27 @@ body {
 	background-color: #181818 !important;
 }
 
+#indexIntro, #aboutSection {
+	color: #fff;
+	text-align: center;
+}
+
+#btnToGlobal, #btnToReg {
+	width: 80%;
+}
+
+#btnToReg {
+	border-radius: 0px;
+	background-color : #2A2B3A;
+	border: 1px solid #2A2B3A;
+}
+
+#btnToGlobal {
+	border-radius: 0px;
+	background-color : #6ECD55;
+	border: 1px solid #6ECD55;
+}
+
 #banner {
 	text-align: right;
 	margin-right: 5%;
@@ -58,8 +79,37 @@ body {
 }
 
 #apiName {
-	color: #FFF;
 	text-align: center;
+}
+
+#logForm, #regForm {
+	border-radius: 3px;
+	background-color: #9D9D9D;
+}
+
+#loginBtn, #registerBtn {
+	margin-bottom: 5%;
+}
+
+#submitContact {
+	margin-bottom: 1%;
+	margin-top: 1%;
+}
+
+#addModal {
+	color: black;
+}
+
+#urlAddTable {
+	margin-left: 1%;
+}
+
+.displayAPIName {
+	color: #fff;
+}
+
+.loginInputs, .regInputs {
+	margin-bottom: 1%;
 }
 
 .detailsContainers {
@@ -114,9 +164,11 @@ body {
 .chevrons {
 	margin-right: 2%;
 }
-.codeRed{
-	color:#F7464A;
+
+.codeRed {
+	color: #F7464A;
 }
-.codeGreen{
-	color:#6ECD55;
+
+.codeGreen {
+	color: #6ECD55;
 }

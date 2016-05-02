@@ -25,12 +25,12 @@ public class APIResultDAOImpl implements APIResultDAO {
 		int rowsAffected = 0;
 		if (apiResult.getId() > 0) {
 			// update
-			String sql = "UPDATE api_result SET api_id=?, date=?, status=? WHERE apiresult_id=?";
+			String sql = "UPDATE api_result SET api_id=?, date=?, status=?, pa_id=? WHERE apiresult_id=?";
 			rowsAffected = jdbcTemplate.update(sql, apiResult.getApiId(), apiResult.getDate(), apiResult.getStatus(), apiResult.getId());
 		} else {
 			// insert
-			String sql = "INSERT INTO api_result (api_id, date, status) VALUES (?,?,?)";
-			rowsAffected = jdbcTemplate.update(sql, apiResult.getApiId(), apiResult.getDate(), apiResult.getStatus());
+			String sql = "INSERT INTO api_result (api_id, date, status, pa_id) VALUES (?,?,?,?)";
+			rowsAffected = jdbcTemplate.update(sql, apiResult.getApiId(), apiResult.getDate(), apiResult.getStatus(), apiResult.getPaId());
 		}
 		return rowsAffected;
 	}
@@ -55,6 +55,7 @@ public class APIResultDAOImpl implements APIResultDAO {
 				anApi.setApiId(rs.getInt("api_id"));
 				anApi.setDate(rs.getDate("date"));
 				anApi.setStatus(rs.getString("status"));
+				anApi.setPaId(rs.getInt("pa_id"));
 				return anApi;
 			}
 
@@ -76,6 +77,7 @@ public class APIResultDAOImpl implements APIResultDAO {
 					api.setApiId(rs.getInt("api_id"));
 					api.setDate(rs.getDate("date"));
 					api.setStatus(rs.getString("status"));
+					api.setPaId(rs.getInt("pa_id"));
 					return api;
 				}
 

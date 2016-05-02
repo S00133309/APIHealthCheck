@@ -10,6 +10,7 @@ public class Result {
 	private Time timePinged;
 	private Date datePinged;
 	private String note;
+	private int paId;
 
 	public Result() {
 	}
@@ -46,6 +47,10 @@ public class Result {
 		return note;
 	}
 
+	public int getPaId() {
+		return paId;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -69,4 +74,9 @@ public class Result {
 	public void setNote(String note) {
 		this.note = note;
 	}
+
+	public void setPaId(int paId) {
+		this.paId = paId;
+	}
+
 }
